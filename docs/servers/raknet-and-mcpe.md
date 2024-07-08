@@ -7,6 +7,7 @@ mentions:
     - ThomasOrs
     - Adrian8115
     - ismaileke
+    - Tom-Teclador
 ---
 
 Minecraft Bedrock uses a protocol known as [RakNet](http://www.jenkinssoftware.com/)
@@ -62,7 +63,7 @@ Minecraft Bedrock will send out a message to all listed servers (and the local n
 
 After this message, the server will respond with something called an unconnected pong. The reason these messages are unconnected is because the client has not established a connection to the server. This is the format of an unconnected pong:
 
-`0x1c | client alive time in ms (recorded from previous ping) | server GUID | string length | Edition (MCPE or MCEE for Education Edition);MOTD line 1;Protocol Version;Version Name;Player Count;Max Player Count;Server Unique ID;MOTD line 2;Game mode;Game mode (numeric);Port (IPv4);Port (IPv6);`
+`0x1c | client alive time in ms (recorded from previous ping) | server GUID | Magic | string length | Edition (MCPE or MCEE for Education Edition);MOTD line 1;Protocol Version;Version Name;Player Count;Max Player Count;Server Unique ID;MOTD line 2;Game mode;Game mode (numeric);Port (IPv4);Port (IPv6);`
 
 Example:
 
@@ -74,7 +75,7 @@ The client doesn't seem to use the gamemode or the numeric value for the gamemod
 
 The client sends this when attempting to join the server
 
-`0x05 | Magic | Protocol version	(currently 10 or 0x0a) | RakNet Null Padding`
+`0x05 | Magic | Protocol version	(currently 11 or 0x0b) | RakNet Null Padding`
 
 The null padding seems to be used to discover the maximum packet size the network can handle.
 
